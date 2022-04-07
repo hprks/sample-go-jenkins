@@ -6,24 +6,19 @@ pipeline{
         scmUrl='https://github.com/hprks/sample-go-jenkins.git'
     }
     stages{
-        stage("Go Version"){
+        stage("Git Clone"){
             steps{
                 sh "${root} version"
             }
         }
-        stage("Git Clone"){
+        stage("Dockerize"){
             steps{
-                git url: "${scmUrl}"
+                sh "docker build -t sample-go-jenkins ."
             }
         }
-        stage("Go Test"){
+        stage("Deploy"){
             steps{
-                sh "${root} test ./... -cover"
-            }
-        }
-        stage("Go Build"){
-            steps{
-                 sh "${root} build ./..."         
+                 echo "DEPLOY SUCCESS"       
             }
         }                        
     }
