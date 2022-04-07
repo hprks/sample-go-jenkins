@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage("Git Clone"){
             steps{
-                sh "${root} version"
+                git url: "{scmUrl}"
             }
         }
         stage("Dockerize"){
